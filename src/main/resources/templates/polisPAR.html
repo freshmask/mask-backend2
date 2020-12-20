@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<table width="100%">
+    <tr>
+        <td colspan="5" style="padding: 5px 0px 5px 0px; margin: 0px; border-radius: 0px 0px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif;justify-content: left; align-items: flex-start; background-color: white">
+            <img align="left" src="https://s8.gifyu.com/images/bumn.png" width="130" height="40" style="display: block; border: 0px; margin-bottom: 0px;" />
+        </td>
+        <td colspan="5" style="padding: 0px 0px 0px 0px;margin: 0px; border-radius: 0px 0px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; justify-content: right; align-items: flex-end; align-content: flex-end; align-self: flex-end ;background-color: white">
+            <img align="right" src="https://s8.gifyu.com/images/Logo-Askrindo-IFG.png" width="130" height="50" style="display: block; border: 0px; margin-bottom: 0px; justify-content: right; align-items: flex-end; align-content: flex-end; align-self: flex-end" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="10" align="center" style="border-bottom: #000000; border-width: 2px ;padding: 0px 0px 0px 0px; font-family: Arial; justify-content: center; align-items: center; align-self: center; align-content: center">
+            <h3 align="center" style="font-family: Arial ;padding-top: 20px; padding-left: 0px; padding-right: 0px; padding-bottom: 20px; margin: 0px; justify-content: center; align-items: center; align-self: center; align-content: center">POLIS STANDARD ASURANSI KEBAKARAN INDONESIA</h3>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" valign="top" colspan="4" style="column-span: 4 ;padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'No. Polis'}" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'Jenis Jaminan'}" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'Nama Tertanggung'}" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'Alamat Tertanggung'}" ></p>
+        </td>
+        <td align="left" valign="top" colspan="6" style="column-span: 6;padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${': ' + polisNumber }" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${': ' + guaranteeType }" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${': ' + customerName }" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${': ' + address }" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td COLSPAN="10" align="center" style="border-bottom: black; border-top: black;border-width: 2px ;padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="center" style="margin: 0; padding-bottom: 10px;font-weight: bold" th:text="${'RINCIAN OBJEK PERTANGGUNGAN'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="4" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Jangka Waktu Pertanggungan'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Lokasi Risiko'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Kode Okupasi'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Kelas Konstruksi'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Total Harga Pertanggungan'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Jaminan Pokok'}" ></p>
+        </td>
+        <td align="left" colspan="6" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': Mulai dari tanggal ' + startDate + ' sampai dengan tanggal ' + endDate + ', kedua tanggal tersebut pada pukul 12.00 siang waktu setempat dimana Harta Benda yang dipertanggungkan berada.'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': ' + riskLocation }" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': ' + occupation }" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': ' + construction }" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 20px;" th:text="${': ' + totalCoverage }" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': ' + principalGuarantee }" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="center" style="margin: 0; padding-bottom: 10px;" th:text="${'No.'}" ></p>
+        </td>
+        <td colspan="7" align="center" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="center" style="margin: 0; padding-bottom: 10px;" th:text="${'Objek Pertanggungan'}" ></p>
+        </td>
+        <td colspan="2" align="center" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="center" style="margin: 0; padding-bottom: 10px;" th:text="${'Nilai Penuh'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="center" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="center" style="margin: 0; padding-bottom: 10px;" th:text="${'1'}" ></p>
+            <p align="center" style="margin: 0; padding-bottom: 10px;" th:text="${'2'}" ></p>
+            <p align="center" style="margin: 0; padding-bottom: 10px;" th:text="${'3'}" ></p>
+        </td>
+        <td colspan="7" valign="top" align="left" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'Bangunan'}" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'Mesin'}" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'Perabotan'}" ></p>
+        </td>
+        <td align="left" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'IDR'}" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'IDR'}" ></p>
+            <p align="left" style="margin: 0; padding-bottom: 10px;" th:text="${'IDR'}" ></p>
+        </td>
+        <td align="right" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="right" style="margin: 0; padding-bottom: 10px;" th:text="${buildingCoverage}" ></p>
+            <p align="right" style="margin: 0; padding-bottom: 10px;" th:text="${machineCoverage}" ></p>
+            <p align="right" style="margin: 0; padding-bottom: 10px;" th:text="${furnitureCoverage}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td COLSPAN="10" align="center" style="border-bottom: black; border-top: black;border-width: 2px ;padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="center" style="margin: 0; padding-bottom: 10px;font-weight: bold" th:text="${'RISIKO SENDIRI, KLAUSULA DAN WARANTI'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="4" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Risiko Sendiri'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Klausula dan Waranti'}" ></p>
+        </td>
+        <td align="left" colspan="6" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': ' + selfRisk}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': ' + clause}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td COLSPAN="10" align="center" style="border-bottom: black; border-top: black;border-width: 2px ;padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="center" style="margin: 0; padding-bottom: 10px;font-weight: bold" th:text="${'PREMI'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="3" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Suku Premi'}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Perhitungan Premi'}" ></p>
+        </td>
+        <td align="left" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${''}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${''}" ></p>
+        </td>
+        <td align="right" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p></p>
+        </td>
+        <td align="left" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': Flexas : ' + rate }" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${': '}" ></p>
+        </td>
+        <td align="left" colspan="2" valign="" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${''}" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${' IDR '}" ></p>
+        </td>
+        <td align="right" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p></p>
+        </td>
+        <td align="right" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="right" style="margin: 0;padding-bottom: 10px;" th:text="${''}" ></p>
+            <p align="right" style="margin: 0;padding-bottom: 10px; padding-top: 20px;" th:text="${ premiPAR }" ></p>
+        </td>
+    <tr>
+        <td align="left" valign="top" colspan="6" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" ></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" ></p>
+        </td>
+        <td align="left" valign="top" colspan="2" style="padding: 0px 0px 50px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Biaya Polis'}"></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Biaya Material'}"></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'Total'}"></p>
+        </td>
+        <td align="left" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'IDR'}"></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;" th:text="${'IDR'}"></p>
+            <p align="left" style="margin: 0;padding-bottom: 10px;"></p>
+        </td>
+        <td align="right" valign="top" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 12px">
+            <p align="right" style="margin: 0;padding-bottom: 10px;" th:text="${polisFee}"></p>
+            <p align="right" style="margin: 0;padding-bottom: 10px;" th:text="${adminFee}"></p>
+            <p align="right" style="margin: 0;padding-bottom: 10px;" th:text="${total}"></p>
+        </td>
+    </tr>
+
+    <tr>
+        <td align="left" colspan="10" style="padding: 150px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 30px;" th:text="${'Dengan Kesaksian yang Bertanda Tangan di bawah ini yang diberi wewenang sepatutnya oleh Penangung dan atas nama Penanggung telah membutuhkan tanda tangannya.'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td align="center" colspan="4" style="padding: 20px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="center" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Jakarta, ' + printDate}" ></p>
+            <p align="center" style="margin: 0; padding-left: 10px; padding-bottom: 70px;" th:text="${'PT ASURANSI KREDIT INDONESIA'}" ></p>
+            <p align="center" style="margin: 0; padding-left: 10px;" th:text="${'Kepala Cabang'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="10" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-top: 650px" th:text="${'Terdaftar dan diawasi oleh :'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="10" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <img align="left" src="https://s8.gifyu.com/images/OJKLogo6e9f036d5a3acd09.png" width="140" height="50" style="display: block; border: 0px; margin-bottom: 0px;" />
+        </td>
+    </tr>
+</table>
+</html>

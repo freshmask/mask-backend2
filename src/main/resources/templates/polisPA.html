@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+</head>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<table width="100%">
+    <tr>
+        <td colspan="5" style="padding: 5px 0px 5px 0px; margin: 0px; border-radius: 0px 0px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif;justify-content: left; align-items: flex-start; background-color: white">
+            <img align="left" src="https://s8.gifyu.com/images/bumn.png" width="130" height="40" style="display: block; border: 0px; margin-bottom: 0px;" />
+        </td>
+        <td colspan="5" style="padding: 0px 0px 0px 0px;margin: 0px; border-radius: 0px 0px 0px 0px; color: #111111; font-family: 'Lato', Helvetica, Arial, sans-serif; justify-content: right; align-items: flex-end; align-content: flex-end; align-self: flex-end ;background-color: white">
+            <img align="right" src="https://s8.gifyu.com/images/Logo-Askrindo-IFG.png" width="130" height="50" style="display: block; border: 0px; margin-bottom: 0px; justify-content: right; align-items: flex-end; align-content: flex-end; align-self: flex-end" />
+        </td>
+    </tr>
+    <tr>
+        <td colspan="10" align="center" style="padding: 0px 0px 0px 0px; font-family: Arial; justify-content: center; align-items: center; align-self: center; align-content: center">
+            <h2 align="center" style="font-family: Arial ;padding-top: 20px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; margin: 0px; justify-content: center; align-items: center; align-self: center; align-content: center">Asuransi Kecelakaan Diri</h2>
+            <h3 align="center" style="font-family: Arial; padding-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 20px; margin: 0px; justify-content: center; align-items: center; align-self: center; align-content: center" th:text="${polisNumber}"></h3>
+        </td>
+    </tr>
+    <tr>
+        <td align="right" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 16px">
+            <p align="right" style="margin: 0;padding-bottom: 10px; font-weight: bold" th:text="${'I.'}" ></p>
+        </td>
+        <td align="left" colspan="9" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 16px">
+            <p align="left" style="margin: 0; padding-left: 10px; padding-bottom: 10px;font-weight: bold" th:text="${'Data Tertanggung'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="left" colspan="3" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Nama Tertanggung'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Nomor Identitas'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'No. Hp Tertanggung'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 20px;" th:text="${'Email Tertanggung'}" ></p>
+        </td>
+        <td align="left" colspan="6" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': ' + name}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': ' + identityNumber}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': ' + phoneNumber}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 20px;" th:text="${': ' + email}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="right" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 16px">
+            <p align="right" style="margin: 0; padding-bottom: 10px;font-weight: bold" th:text="${'II.'}" ></p>
+        </td>
+        <td align="left" colspan="9" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 16px">
+            <p align="left" style="margin: 0; padding-left: 10px; padding-bottom: 10px;font-weight: bold" th:text="${'Data Ahli Waris'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="left" colspan="3" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Nama Ahli Waris'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'No. Hp Ahli Waris'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 20px;" th:text="${'Email Ahli Waris'}" ></p>
+        </td>
+        <td align="left" colspan="6" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': ' + heirName}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': ' + heirPhoneNumber}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 20px;" th:text="${': ' + emailHeir}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="right" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 16px">
+            <p align="right" style="margin: 0;padding-bottom: 10px;font-weight: bold" th:text="${'III.'}" ></p>
+        </td>
+        <td align="left" colspan="9" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 16px">
+            <p align="left" style="margin: 0; padding-left: 10px;font-weight: bold; padding-bottom: 10px;" th:text="${'Paket Asuransi'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td align="left" colspan="3" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Paket yang Dipilih'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Periode Asuransi'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Total Santunan'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Premi'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 20px;" th:text="${'Detail Manfaat'}" ></p>
+        </td>
+        <td align="left" colspan="6" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px; padding-bottom: 10px;" th:text="${': ' + packageName + ' (' + days + ' hari)'}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': ' + startPeriode + ' s/d ' + endPeriode}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': Rp ' + compensation}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${': Rp ' + premi}" ></p>
+            <p align="left" style="margin: 0; padding-left: 10px;padding-bottom: 20px;" th:text="${': ' + benefits}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="10" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-left: 10px; padding-bottom: 50px;" th:text="${'Polis asuransi personal accident ini diterbitkan pada tanggal sebagaimana disebutkan di bawah ini dan berlaku sebagai bukti pelengkap untuk mengajukan KLAIM'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td align="center" colspan="4" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="center" style="margin: 0; padding-left: 10px;padding-bottom: 10px;" th:text="${'Jakarta, ' + date}" ></p>
+            <p align="center" style="margin: 0; padding-left: 10px; padding-bottom: 70px;" th:text="${'PT ASURANSI KREDIT INDONESIA'}" ></p>
+            <p align="center" style="margin: 0; padding-left: 10px;" th:text="${'PENANGGUNG'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="10" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <p align="left" style="margin: 0; padding-top: 100px" th:text="${'Terdaftar dan diawasi oleh :'}" ></p>
+        </td>
+    </tr>
+    <tr>
+        <td align="left" colspan="10" style="padding: 0px 0px 0px 0px; font-family: Arial; font-size: 14px">
+            <img align="left" src="https://s8.gifyu.com/images/OJKLogo6e9f036d5a3acd09.png" width="120" height="40" style="display: block; border: 0px; margin-bottom: 0px;" />
+        </td>
+    </tr>
+</table>
+</html>
