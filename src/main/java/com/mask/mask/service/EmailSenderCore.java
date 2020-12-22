@@ -26,6 +26,9 @@ public class EmailSenderCore {
     PackagePAService packagePAService;
 
     @Autowired
+    UsersService usersService;
+
+    @Autowired
     TransactionPAService transactionPAService;
 
     @Autowired
@@ -45,6 +48,7 @@ public class EmailSenderCore {
 
     @Autowired
     CustomerTravelService customerTravelService;
+
 
     public void contextLoads(Users users, SecureToken secureToken) {
         Mail mail = new Mail();
@@ -89,10 +93,16 @@ public class EmailSenderCore {
         CategoryPA categoryPA = categoryPAService.getCategoryPAById(transactionPA.getCategoryPA().getCategoryId());
         PackagePA packagePA = packagePAService.getPackagePAById(categoryPA.getPackagePA().getPaId());
         Product product = productService.getProductById(packagePA.getProduct().getProductId());
+        Transaction transaction = transactionService.getTransactionById(transactionPA.getTransaction().getId());
+        Users users = usersService.getUsersById(transaction.getUsers().getId());
+        String[] emailBCC = new String[2];
+        emailBCC[0] = customerPA.getEmail();
+        emailBCC[1] = customerPA.getHeirEmail();
 
         Mail mail = new Mail();
         mail.setFrom("mask.askrindo@gmail.com");
-        mail.setTo(customerPA.getEmail());
+        mail.setTo(users.getEmail());
+        mail.setBcc(emailBCC);
         mail.setSubject("[M-ASK] Sertifikat Asuransi Kecelakaan Diri");
 
         Map<String, Object> model = new HashMap<>();
@@ -108,11 +118,16 @@ public class EmailSenderCore {
     public void sendPolisTravel(TransactionTravel transactionTravel, CustomerTravel customerTravel) {
         PackageTravel packageTravel = packageTravelService.getPackageTravelById(transactionTravel.getPackageTravel().getPtId());
         Product product = productService.getProductById(packageTravel.getProduct().getProductId());
-
+        Transaction transaction = transactionService.getTransactionById(transactionTravel.getTransaction().getId());
+        Users users = usersService.getUsersById(transaction.getUsers().getId());
+        String[] emailBCC = new String[2];
+        emailBCC[0] = customerTravel.getEmail();
+        emailBCC[1] = customerTravel.getHeirEmail();
 
         Mail mail = new Mail();
         mail.setFrom("mask.askrindo@gmail.com");
-        mail.setTo(customerTravel.getEmail());
+        mail.setTo(users.getEmail());
+        mail.setBcc(emailBCC);
         mail.setSubject("[M-ASK] Sertifikat Asuransi Perjalanan");
 
         String polisTravelNumber = transactionTravel.getId();
@@ -127,9 +142,15 @@ public class EmailSenderCore {
 
     public void sendPolisPAR(TransactionPAR transactionPAR, CustomerPAR customerPAR) {
         Product product = productService.getProductById(transactionPAR.getProduct().getProductId());
+        Transaction transaction = transactionService.getTransactionById(transactionPAR.getTransaction().getId());
+        Users users = usersService.getUsersById(transaction.getUsers().getId());
+        String[] emailBCC = new String[1];
+        emailBCC[0] = customerPAR.getEmail();
+
         Mail mail = new Mail();
         mail.setFrom("mask.askrindo@gmail.com");
-        mail.setTo(customerPAR.getEmail());
+        mail.setTo(users.getEmail());
+        mail.setBcc(emailBCC);
         mail.setSubject("[M-ASK] Sertifikat Asuransi Property atau Harta Benda");
 
         String polisPARNumber = transactionPAR.getTrxparId();

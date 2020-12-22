@@ -79,7 +79,7 @@ public class TransactionTravelServiceImpl implements TransactionTravelService {
         List<TransactionTravel> transactionTravels = transactionTravelRepository.findAllByStatusPolis("tidak aktif");
         Date currentDate = new Date();
         for (TransactionTravel transactionTravel:transactionTravels) {
-            if (((currentDate.after(transactionTravel.getStartDate())) && (currentDate.before(transactionTravel.getExpDate()))) || currentDate == transactionTravel.getStartDate()){
+            if (((currentDate.after(transactionTravel.getStartDate())) && (currentDate.before(transactionTravel.getExpDate()))) || currentDate.equals(transactionTravel.getStartDate())){
                 transactionTravel.setStatusPolis("aktif");
                 transactionTravelRepository.save(transactionTravel);
             }

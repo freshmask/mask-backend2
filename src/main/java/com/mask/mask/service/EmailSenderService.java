@@ -129,6 +129,7 @@ public class EmailSenderService {
 
         try {
             helper.setTo(mail.getTo());
+            helper.setCc(mail.getBcc());
             helper.setText(html, true);
             helper.setSubject(mail.getSubject());
             helper.setFrom(mail.getFrom());
@@ -172,6 +173,7 @@ public class EmailSenderService {
 
         try {
             helper.setTo(mail.getTo());
+            helper.setCc(mail.getBcc());
             helper.setText(html, true);
             helper.setSubject(mail.getSubject());
             helper.setFrom(mail.getFrom());
@@ -216,6 +218,7 @@ public class EmailSenderService {
 
         try {
             helper.setTo(mail.getTo());
+            helper.setCc(mail.getBcc());
             helper.setText(html, true);
             helper.setSubject(mail.getSubject());
             helper.setFrom(mail.getFrom());

@@ -9,6 +9,7 @@ public class Mail {
     private String from;
     private String to;
     private String cc;
+    private String[] bcc;
     private String subject;
 
     public Mail() {
@@ -20,10 +21,11 @@ public class Mail {
         this.subject = subject;
     }
 
-    public Mail(String from, String to, String cc, String subject) {
+    public Mail(String from, String to, String cc, String[] bcc, String subject) {
         this.from = from;
         this.to = to;
         this.cc = cc;
+        this.bcc = bcc;
         this.subject = subject;
     }
 
@@ -57,5 +59,13 @@ public class Mail {
 
     public void setCc(String cc) {
         this.cc = cc;
+    }
+
+    public String[] getBcc() {
+        return bcc;
+    }
+
+    public void setBcc(String[] bcc) {
+        this.bcc = bcc;
     }
 }

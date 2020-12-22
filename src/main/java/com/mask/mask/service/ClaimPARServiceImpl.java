@@ -135,29 +135,29 @@ public class ClaimPARServiceImpl implements ClaimPARService {
     @Override
     public void updateClaimPARApproved(String id, ClaimPAR claimPAR) throws IOException, MessagingException {
         ClaimPAR claimPAR1 = claimPARRepository.findById(id).get();
-//        if(claimPAR.getClaimApproval() > claimPAR.getClaimSubmission()){
-//            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
-//        } else {
-//            claimPAR1.setClaimApproval(claimPAR.getClaimApproval());
-//            Transaction transaction = transactionService.getTransactionById(claimPAR1.getTransaction().getId());
-//            claimPAR1.getTransaction().getTransactionPAR().setStatusClaim("disetujui");
-//            transaction.setVersion(transaction.getVersion() + 1);
-//            claimPARRepository.save(claimPAR1);
-//            emailSenderCore.sendNotifClaimPAR(claimPAR1);
-//        }
-
-        if(claimPAR.getClaimApproval() <= claimPAR.getClaimSubmission()){
-            claimPAR1.setClaimApproval(claimPAR1.getClaimApproval());
+        if(claimPAR.getClaimApproval() > claimPAR.getClaimSubmission()){
+            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
+        } else {
+            claimPAR1.setClaimApproval(claimPAR.getClaimApproval());
             Transaction transaction = transactionService.getTransactionById(claimPAR1.getTransaction().getId());
-            claimPAR1.getTransaction().getTransactionPA().setStatusClaim("disetujui");
+            claimPAR1.getTransaction().getTransactionPAR().setStatusClaim("disetujui");
             transaction.setVersion(transaction.getVersion() + 1);
             claimPARRepository.save(claimPAR1);
             emailSenderCore.sendNotifClaimPAR(claimPAR1);
-        } else if (claimPAR.getClaimApproval() > claimPAR.getClaimSubmission()){
-            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
-        } else {
-            throw new EmailDoesntSendException(String.format("Anda gagal melakukan persetujuan klaim, silakan cek koneksi internet"));
         }
+
+//        if(claimPAR.getClaimApproval() <= claimPAR.getClaimSubmission()){
+//            claimPAR1.setClaimApproval(claimPAR1.getClaimApproval());
+//            Transaction transaction = transactionService.getTransactionById(claimPAR1.getTransaction().getId());
+//            claimPAR1.getTransaction().getTransactionPA().setStatusClaim("disetujui");
+//            transaction.setVersion(transaction.getVersion() + 1);
+//            claimPARRepository.save(claimPAR1);
+//            emailSenderCore.sendNotifClaimPAR(claimPAR1);
+//        } else if (claimPAR.getClaimApproval() > claimPAR.getClaimSubmission()){
+//            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
+//        } else {
+//            throw new EmailDoesntSendException(String.format("Anda gagal melakukan persetujuan klaim, silakan cek koneksi internet"));
+//        }
     }
 
 

@@ -207,7 +207,9 @@ public class TransactionServiceImpl implements TransactionService {
                 CustomerTravel customerTravel = transactionTravel.getCustomerTravel();
                 transactionTravel.setIsPayment("Lunas");
                 Date currentDate = new Date();
-                if ((currentDate.after(transactionTravel.getStartDate())) || (currentDate == transactionTravel.getStartDate())){
+                if(currentDate.before(transactionTravel.getStartDate())){
+                    transactionTravel.setStatusPolis("belum berlaku");
+                } else if ((currentDate.after(transactionTravel.getStartDate())) || (currentDate.equals(transactionTravel.getStartDate()))){
                     transactionTravel.setStatusPolis("aktif");
                 }
                 transactionTravelService.updateTransactionTravel(transactionTravel.getId(), transactionTravel);
