@@ -166,7 +166,6 @@ public class ClaimTravelServiceImpl implements ClaimTravelService {
             claimTravel1.setClaimApproval(claimTravel.getClaimApproval());
             Transaction transaction = transactionService.getTransactionById(claimTravel1.getTransaction().getId());
             claimTravel1.getTransaction().getTransactionTravel().setStatusClaim("disetujui");
-            claimTravel1.getTransaction().getTransactionTravel().setIsClaim("true");
             transaction.setVersion(transaction.getVersion() + 1);
             claimTravelRepository.save(claimTravel1);
             String description = "";
@@ -179,7 +178,6 @@ public class ClaimTravelServiceImpl implements ClaimTravelService {
         ClaimTravel claimTravel1 = claimTravelRepository.findById(id).get();
         Transaction transaction = transactionService.getTransactionById(claimTravel1.getTransaction().getId());
         claimTravel1.getTransaction().getTransactionTravel().setStatusClaim("ditolak");
-        claimTravel1.getTransaction().getTransactionTravel().setIsClaim("false");
         transaction.setVersion(transaction.getVersion() + 1);
         claimTravelRepository.save(claimTravel1);
         emailSenderCore.sendNotifClaimTravel(claimTravel1, description);
