@@ -170,12 +170,14 @@ public class EmailSenderCore {
         Product product = productService.getProductById(packagePA.getProduct().getProductId());
         String statusClaim = transactionPA.getStatusClaim();
         CustomerPA customerPA = customerPAService.getCustomerPAById(transactionPA.getCustomerPA().getCustomerpaId());
-        String emailCustomer = customerPA.getEmail();
+        String[] emailBCC = new String[2];
+        emailBCC[0] = customerPA.getEmail();
+        emailBCC[1] = customerPA.getHeirEmail();
 
         Mail mail = new Mail();
         mail.setFrom("mask.askrindo@gmail.com");
         mail.setTo(claimPA.getEmail());
-        mail.setCc(emailCustomer);
+        mail.setBcc(emailBCC);
         mail.setSubject("[M-ASK] Konfirmasi Klaim Asuransi Kecelakaan Diri");
 
         Map<String, Object> model = new HashMap<>();
@@ -204,12 +206,14 @@ public class EmailSenderCore {
         Product product = productService.getProductById(packageTravel.getProduct().getProductId());
         String statusClaim = transactionTravel.getStatusClaim();
         CustomerTravel customerTravel = customerTravelService.getCustomerTravelById(transactionTravel.getCustomerTravel().getCustomertravelId());
-        String emailCustomer = customerTravel.getEmail();
+        String[] emailBCC = new String[2];
+        emailBCC[0] = customerTravel.getEmail();
+        emailBCC[1] = customerTravel.getHeirEmail();
 
         Mail mail = new Mail();
         mail.setFrom("mask.askrindo@gmail.com");
         mail.setTo(claimTravel.getEmail());
-        mail.setCc(emailCustomer);
+        mail.setBcc(emailBCC);
         mail.setSubject("[M-ASK] Konfirmasi Klaim Asuransi Perjalanan");
 
         Map<String, Object> model = new HashMap<>();
@@ -237,13 +241,13 @@ public class EmailSenderCore {
         Product product = productService.getProductById(transactionPAR.getProduct().getProductId());
         String statusClaim = transactionPAR.getStatusClaim();
         CustomerPAR customerPAR = customerPARService.getCustomerPARById(transactionPAR.getCustomerPAR().getId());
-        String emailCustomer = customerPAR.getEmail();
-
+        String[] emailBCC = new String[1];
+        emailBCC[0] = customerPAR.getEmail();
 
         Mail mail = new Mail();
         mail.setFrom("mask.askrindo@gmail.com");
         mail.setTo(claimPAR.getEmail());
-        mail.setCc(emailCustomer);
+        mail.setBcc(emailBCC);
         mail.setSubject("[M-ASK] Konfirmasi Klaim Asuransi Property atau Harta Benda");
 
         Map<String, Object> model = new HashMap<>();

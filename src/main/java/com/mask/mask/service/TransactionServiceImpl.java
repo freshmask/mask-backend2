@@ -389,7 +389,7 @@ public class TransactionServiceImpl implements TransactionService {
         System.out.println("Ini date 1" + date2);
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(date2);
-        calendar.add(Calendar.HOUR_OF_DAY, 24);
+        calendar.add(Calendar.HOUR_OF_DAY, 23);
         Date newDate2 = calendar.getTime();
         System.out.println("Ini new date 2" + newDate2);
         List<TransactionPA> transactionPAS = transactionPAService.getAllTransactionPA();

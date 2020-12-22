@@ -252,7 +252,8 @@ public class EmailSenderService {
         String html = templateEngine.process("ClaimNotification", context);
 
         try {
-            helper.setTo(new String[]{mail.getTo(), mail.getCc()});
+            helper.setTo(mail.getTo());
+            helper.setCc(mail.getBcc());
             helper.setText(html, true);
             helper.setSubject(mail.getSubject());
             helper.setFrom(mail.getFrom());
