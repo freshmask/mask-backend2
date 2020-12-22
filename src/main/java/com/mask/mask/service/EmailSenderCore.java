@@ -192,7 +192,7 @@ public class EmailSenderCore {
         if (statusClaim.equalsIgnoreCase("disetujui")){
             model.put("approval", "Pengajuan permohonan klaim telah memenuhi persyaratan dan kami setujui dengan jumlah sebesar Rp " + approveValue);
         } else if (statusClaim.equalsIgnoreCase("ditolak")) {
-            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan dengan alasan " +description+ ". Silakan lengkapi dokumen sesuai dengan persyaratan.");
+            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan karena '" +description+ "'.\n Silakan lengkapi dokumen sesuai dengan persyaratan.");
         }
 
         emailSenderService.sendClaimMessage(mail, model);
@@ -226,7 +226,7 @@ public class EmailSenderCore {
         if (statusClaim.equalsIgnoreCase("disetujui")){
             model.put("approval", "Pengajuan permohonan klaim telah memenuhi persyaratan dan kami setujui dengan jumlah sebesar Rp " + approveValue);
         } else if (statusClaim.equalsIgnoreCase("ditolak")) {
-            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan dengan alasan " +description+ ". Silakan lengkapi dokumen sesuai dengan persyaratan.");
+            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan karena '" +description+ "'.\n Silakan lengkapi dokumen sesuai dengan persyaratan.");
         }
 
         emailSenderService.sendClaimMessage(mail, model);
@@ -260,7 +260,7 @@ public class EmailSenderCore {
         if (statusClaim.equalsIgnoreCase("disetujui")){
             model.put("approval", "Pengajuan permohonan klaim telah memenuhi persyaratan dan kami setujui dengan jumlah sebesar Rp " + approveValue);
         } else if (statusClaim.equalsIgnoreCase("ditolak")) {
-            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan dengan alasan " +description+ ". Silakan lengkapi dokumen sesuai dengan persyaratan.");
+            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan karena '" +description+ "'.\n Silakan lengkapi dokumen sesuai dengan persyaratan.");
         }
         emailSenderService.sendClaimMessage(mail, model);
     }
