@@ -186,16 +186,31 @@ public class ClaimPAServiceImpl implements ClaimPAService {
     @Override
     public void updateClaimPAAproved(String id, ClaimPA claimPA) throws IOException, MessagingException {
         ClaimPA claimPA1 = claimPARepository.findById(id).get();
-        if(claimPA.getClaimApproval() > claimPA.getClaimSubmission()) {
-            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
-        } else {
+//        if(claimPA.getClaimApproval() > claimPA.getClaimSubmission()) {
+//            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
+//        } else {
+//            claimPA1.setClaimApproval(claimPA.getClaimApproval());
+//            Transaction transaction = transactionService.getTransactionById(claimPA1.getTransaction().getId());
+//            claimPA1.getTransaction().getTransactionPA().setStatusClaim("disetujui");
+//            transaction.setVersion(transaction.getVersion() + 1);
+//            claimPARepository.save(claimPA1);
+//            emailSenderCore.sendNotifClaimPA(claimPA1);
+//        }
+
+        if(claimPA.getClaimApproval() <= claimPA.getClaimSubmission()){
             claimPA1.setClaimApproval(claimPA.getClaimApproval());
             Transaction transaction = transactionService.getTransactionById(claimPA1.getTransaction().getId());
             claimPA1.getTransaction().getTransactionPA().setStatusClaim("disetujui");
             transaction.setVersion(transaction.getVersion() + 1);
             claimPARepository.save(claimPA1);
             emailSenderCore.sendNotifClaimPA(claimPA1);
+        } else if (claimPA.getClaimApproval() > claimPA.getClaimSubmission()){
+            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
+        } else {
+            throw new EmailDoesntSendException(String.format("Anda gagal melakukan persetujuan klaim, silakan cek koneksi internet"));
         }
+
+
     }
 
     @Override

@@ -160,15 +160,28 @@ public class ClaimTravelServiceImpl implements ClaimTravelService {
     @Override
     public void updateClaimTravelApproved(String id, ClaimTravel claimTravel) throws IOException, MessagingException {
         ClaimTravel claimTravel1 = claimTravelRepository.findById(id).get();
-        if(claimTravel.getClaimApproval() > claimTravel.getClaimSubmission()) {
-            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
-        } else {
+//        if(claimTravel.getClaimApproval() > claimTravel.getClaimSubmission()) {
+//            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
+//        } else {
+//            claimTravel1.setClaimApproval(claimTravel.getClaimApproval());
+//            Transaction transaction = transactionService.getTransactionById(claimTravel1.getTransaction().getId());
+//            claimTravel1.getTransaction().getTransactionTravel().setStatusClaim("disetujui");
+//            transaction.setVersion(transaction.getVersion() + 1);
+//            claimTravelRepository.save(claimTravel1);
+//            emailSenderCore.sendNotifClaimTravel(claimTravel1);
+//        }
+
+        if(claimTravel.getClaimApproval() <= claimTravel.getClaimSubmission()){
             claimTravel1.setClaimApproval(claimTravel.getClaimApproval());
             Transaction transaction = transactionService.getTransactionById(claimTravel1.getTransaction().getId());
-            claimTravel1.getTransaction().getTransactionTravel().setStatusClaim("disetujui");
+            claimTravel1.getTransaction().getTransactionPA().setStatusClaim("disetujui");
             transaction.setVersion(transaction.getVersion() + 1);
             claimTravelRepository.save(claimTravel1);
             emailSenderCore.sendNotifClaimTravel(claimTravel1);
+        } else if (claimTravel.getClaimApproval() > claimTravel.getClaimSubmission()){
+            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
+        } else {
+            throw new EmailDoesntSendException(String.format("Anda gagal melakukan persetujuan klaim, silakan cek koneksi internet"));
         }
     }
 
