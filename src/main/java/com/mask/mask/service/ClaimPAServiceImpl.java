@@ -192,6 +192,7 @@ public class ClaimPAServiceImpl implements ClaimPAService {
             claimPA1.setClaimApproval(claimPA.getClaimApproval());
             Transaction transaction = transactionService.getTransactionById(claimPA1.getTransaction().getId());
             claimPA1.getTransaction().getTransactionPA().setStatusClaim("disetujui");
+            claimPA1.getTransaction().getTransactionPA().setIsClaim("true");
             transaction.setVersion(transaction.getVersion() + 1);
             claimPARepository.save(claimPA1);
             String description = "";
@@ -206,6 +207,7 @@ public class ClaimPAServiceImpl implements ClaimPAService {
         ClaimPA claimPA1 = claimPARepository.findById(id).get();
         Transaction transaction = transactionService.getTransactionById(claimPA1.getTransaction().getId());
         claimPA1.getTransaction().getTransactionPA().setStatusClaim("ditolak");
+        claimPA1.getTransaction().getTransactionPA().setIsClaim("false");
         transaction.setVersion(transaction.getVersion() + 1);
         claimPARepository.save(claimPA1);
         emailSenderCore.sendNotifClaimPA(claimPA1, description);

@@ -141,6 +141,7 @@ public class ClaimPARServiceImpl implements ClaimPARService {
             claimPAR1.setClaimApproval(claimPAR.getClaimApproval());
             Transaction transaction = transactionService.getTransactionById(claimPAR1.getTransaction().getId());
             claimPAR1.getTransaction().getTransactionPAR().setStatusClaim("disetujui");
+            claimPAR1.getTransaction().getTransactionPAR().setIsClaim("true");
             transaction.setVersion(transaction.getVersion() + 1);
             claimPARRepository.save(claimPAR1);
             String description = "";
@@ -155,6 +156,7 @@ public class ClaimPARServiceImpl implements ClaimPARService {
         ClaimPAR claimPAR1 = claimPARRepository.findById(id).get();
         Transaction transaction = transactionService.getTransactionById(claimPAR1.getTransaction().getId());
         claimPAR1.getTransaction().getTransactionPAR().setStatusClaim("ditolak");
+        claimPAR1.getTransaction().getTransactionPAR().setIsClaim("false");
         transaction.setVersion(transaction.getVersion() + 1);
         claimPARRepository.save(claimPAR1);
         emailSenderCore.sendNotifClaimPAR(claimPAR1, description);
