@@ -19,5 +19,5 @@ public interface ClaimPARService {
     public void editClaimPAR(String claimparId, ClaimPAR claimPAR);
     public void deleteClaimPARById (String claimparId);
     public void updateClaimPARApproved(String id, ClaimPAR claimPAR) throws IOException, MessagingException;
-    public void updateClaimPARRejected(String id) throws IOException, MessagingException;
+    public void updateClaimPARRejected(String id, String description) throws IOException, MessagingException;
 }

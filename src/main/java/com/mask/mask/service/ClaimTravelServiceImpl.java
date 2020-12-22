@@ -168,30 +168,18 @@ public class ClaimTravelServiceImpl implements ClaimTravelService {
             claimTravel1.getTransaction().getTransactionTravel().setStatusClaim("disetujui");
             transaction.setVersion(transaction.getVersion() + 1);
             claimTravelRepository.save(claimTravel1);
-            emailSenderCore.sendNotifClaimTravel(claimTravel1);
+            String description = "";
+            emailSenderCore.sendNotifClaimTravel(claimTravel1, description);
         }
-
-//        if(claimTravel.getClaimApproval() <= claimTravel.getClaimSubmission()){
-//            claimTravel1.setClaimApproval(claimTravel.getClaimApproval());
-//            Transaction transaction = transactionService.getTransactionById(claimTravel1.getTransaction().getId());
-//            claimTravel1.getTransaction().getTransactionPA().setStatusClaim("disetujui");
-//            transaction.setVersion(transaction.getVersion() + 1);
-//            claimTravelRepository.save(claimTravel1);
-//            emailSenderCore.sendNotifClaimTravel(claimTravel1);
-//        } else if (claimTravel.getClaimApproval() > claimTravel.getClaimSubmission()){
-//            throw new NominalExceedException(String.format("Nominal persetujuan yang kamu berikan melebihi tuntutan user"));
-//        } else {
-//            throw new EmailDoesntSendException(String.format("Anda gagal melakukan persetujuan klaim, silakan cek koneksi internet"));
-//        }
     }
 
     @Override
-    public void updateClaimTravelRejected(String id) throws IOException, MessagingException {
+    public void updateClaimTravelRejected(String id, String description) throws IOException, MessagingException {
         ClaimTravel claimTravel1 = claimTravelRepository.findById(id).get();
         Transaction transaction = transactionService.getTransactionById(claimTravel1.getTransaction().getId());
         claimTravel1.getTransaction().getTransactionTravel().setStatusClaim("ditolak");
         transaction.setVersion(transaction.getVersion() + 1);
         claimTravelRepository.save(claimTravel1);
-        emailSenderCore.sendNotifClaimTravel(claimTravel1);
+        emailSenderCore.sendNotifClaimTravel(claimTravel1, description);
     }
 }

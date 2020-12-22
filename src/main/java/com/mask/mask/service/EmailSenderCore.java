@@ -163,7 +163,7 @@ public class EmailSenderCore {
         emailSenderService.sendPolisPAR(mail, model, polisPARNumber);
     }
 
-    public void sendNotifClaimPA(ClaimPA claimPA) {
+    public void sendNotifClaimPA(ClaimPA claimPA, String description) {
         TransactionPA transactionPA = transactionPAService.getransactionPAByTransactionId(claimPA.getTransaction().getId());
         CategoryPA categoryPA = categoryPAService.getCategoryPAById(transactionPA.getCategoryPA().getCategoryId());
         PackagePA packagePA = packagePAService.getPackagePAById(categoryPA.getPackagePA().getPaId());
@@ -192,13 +192,13 @@ public class EmailSenderCore {
         if (statusClaim.equalsIgnoreCase("disetujui")){
             model.put("approval", "Pengajuan permohonan klaim telah memenuhi persyaratan dan kami setujui dengan jumlah sebesar Rp " + approveValue);
         } else if (statusClaim.equalsIgnoreCase("ditolak")) {
-            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan sehingga tidak dapat diproses lebih lanjut");
+            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan dengan alasan " +description+ ". Silakan lengkapi dokumen sesuai dengan persyaratan.");
         }
 
         emailSenderService.sendClaimMessage(mail, model);
     }
 
-    public void sendNotifClaimTravel(ClaimTravel claimTravel) {
+    public void sendNotifClaimTravel(ClaimTravel claimTravel, String description) {
         TransactionTravel transactionTravel = transactionTravelService.getransactionTravelByTransactionId(claimTravel.getTransaction().getId());
         PackageTravel packageTravel = packageTravelService.getPackageTravelById(transactionTravel.getPackageTravel().getPtId());
         Product product = productService.getProductById(packageTravel.getProduct().getProductId());
@@ -226,13 +226,13 @@ public class EmailSenderCore {
         if (statusClaim.equalsIgnoreCase("disetujui")){
             model.put("approval", "Pengajuan permohonan klaim telah memenuhi persyaratan dan kami setujui dengan jumlah sebesar Rp " + approveValue);
         } else if (statusClaim.equalsIgnoreCase("ditolak")) {
-            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan sehingga tidak dapat diproses lebih lanjut");
+            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan dengan alasan " +description+ ". Silakan lengkapi dokumen sesuai dengan persyaratan.");
         }
 
         emailSenderService.sendClaimMessage(mail, model);
     }
 
-    public void sendNotifClaimPAR(ClaimPAR claimPAR) {
+    public void sendNotifClaimPAR(ClaimPAR claimPAR, String description) {
         TransactionPAR transactionPAR = transactionPARService.getTransactionPARByTransactionId(claimPAR.getTransaction().getId());
         Product product = productService.getProductById(transactionPAR.getProduct().getProductId());
         String statusClaim = transactionPAR.getStatusClaim();
@@ -260,7 +260,7 @@ public class EmailSenderCore {
         if (statusClaim.equalsIgnoreCase("disetujui")){
             model.put("approval", "Pengajuan permohonan klaim telah memenuhi persyaratan dan kami setujui dengan jumlah sebesar Rp " + approveValue);
         } else if (statusClaim.equalsIgnoreCase("ditolak")) {
-            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan sehingga tidak dapat diproses lebih lanjut");
+            model.put("approval", "Pengajuan permohonan klaim belum memenuhi persyaratan dengan alasan " +description+ ". Silakan lengkapi dokumen sesuai dengan persyaratan.");
         }
         emailSenderService.sendClaimMessage(mail, model);
     }

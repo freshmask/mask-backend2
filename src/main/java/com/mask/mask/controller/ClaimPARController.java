@@ -138,6 +138,6 @@ public class ClaimPARController {
 
 
     @PutMapping("/rejectedClaimPAR/{id}")
-    public void updateRejectedPAR (@PathVariable String id) throws IOException, MessagingException {
-        claimPARService.updateClaimPARRejected(id);}
+    public void updateRejectedPAR (@PathVariable String id, @RequestParam String description) throws IOException, MessagingException {
+        claimPARService.updateClaimPARRejected(id, description);}
 }

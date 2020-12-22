@@ -171,7 +171,7 @@ public class ClaimPAController {
     }
 
     @PutMapping("/rejectedClaimPA/{id}")
-    public void rejectedClaimPA(@PathVariable(name = "id") String id) throws IOException, MessagingException {
-        claimPAService.updateClaimPARejected(id);
+    public void rejectedClaimPA(@PathVariable(name = "id") String id, @RequestParam String description) throws IOException, MessagingException {
+        claimPAService.updateClaimPARejected(id, description);
     }
 }

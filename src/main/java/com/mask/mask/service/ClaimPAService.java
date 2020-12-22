@@ -20,7 +20,7 @@ public interface ClaimPAService {
     public void deleteClaimPAById(String id);
 
     public void updateClaimPAAproved(String id, ClaimPA claimPA) throws IOException, MessagingException;
-    public void updateClaimPARejected(String id) throws IOException, MessagingException;
+    public void updateClaimPARejected(String id, String description) throws IOException, MessagingException;
 
 
 }

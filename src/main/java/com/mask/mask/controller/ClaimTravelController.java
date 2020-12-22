@@ -166,8 +166,8 @@ public class ClaimTravelController {
 
 
     @PutMapping("/rejectedTravel/{id}")
-    public void updateRejectedTravel (@PathVariable String id) throws IOException, MessagingException {
-        claimTravelService.updateClaimTravelRejected(id);
+    public void updateRejectedTravel (@PathVariable String id, @RequestParam String description) throws IOException, MessagingException {
+        claimTravelService.updateClaimTravelRejected(id, description);
     }
 
 }

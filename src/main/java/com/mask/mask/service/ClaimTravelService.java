@@ -18,5 +18,5 @@ public interface ClaimTravelService {
     public void editClaimTravel(String id, ClaimTravel claimTravel);
     public void deleteClaimTravelById (String id);
     public void updateClaimTravelApproved(String id, ClaimTravel claimTravel) throws IOException, MessagingException;
-    public void updateClaimTravelRejected(String id) throws IOException, MessagingException;
+    public void updateClaimTravelRejected(String id, String description) throws IOException, MessagingException;
 }
