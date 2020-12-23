@@ -81,10 +81,12 @@ public class TransactionServiceImpl implements TransactionService {
             TransactionPAR transactionPAR = transaction1.getTransactionPAR();
             if (transactionPA != null) {
                 TransactionPA transactionPA1 = transactionPAService.getTransactionPAById(transactionPA.getTrxpaId());
-                transactionPA1.setStartDate(cal.getTime());
+                transactionPA1.setStartDate(new Date());
                 transactionPA1.setAdminFee(0.0f);
                 CategoryPA categoryPA = categoryPAService.getCategoryPAById(transaction.getTransactionPA().getCategoryPA().getCategoryId());
                 Integer days = categoryPA.getDays();
+                System.out.println("ini cal sekarang"+cal.getTime());
+                cal.setTime(new Date());
                 cal.add(Calendar.DAY_OF_MONTH, days);
                 transactionPA1.setExpDate(cal.getTime());
                 cal.add(Calendar.DAY_OF_MONTH, -days);
@@ -135,10 +137,11 @@ public class TransactionServiceImpl implements TransactionService {
             } else if (transactionPAR != null) {
                 TransactionPAR transactionPAR1 = transactionPARService.getTransactionPARById(transactionPAR.getTrxparId());
                 transactionPAR1.setCustomerPAR(transactionPAR.getCustomerPAR());
-                transactionPAR1.setStartDate(cal.getTime());
+                transactionPAR1.setStartDate(new Date());
                 transactionPAR1.setAdminFee(12000f);
                 Product product = productService.getProductById(transaction.getTransactionPAR().getProduct().getProductId());
                 CustomerPAR customerPAR = transactionPAR.getCustomerPAR();
+                cal.setTime(new Date());
                 cal.add(Calendar.DAY_OF_MONTH, cal.getActualMaximum(Calendar.DAY_OF_YEAR));
                 transactionPAR.setExpDate(cal.getTime());
                 cal.add(Calendar.DAY_OF_MONTH, -cal.getActualMaximum(Calendar.DAY_OF_YEAR));
