@@ -3,6 +3,7 @@ package com.mask.mask.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mask.mask.entity.ClaimPA;
+import com.mask.mask.entity.ClaimTravel;
 import com.mask.mask.entity.Transaction;
 import com.mask.mask.entity.Users;
 import com.mask.mask.exception.IncompleteFileException;
@@ -96,6 +97,56 @@ public class ClaimPAController {
         return result;
     }
 
+    @PostMapping("/claimpaByHeir")
+    public String saveClaimPAByHeir(@RequestPart (required = false) MultipartFile medicalCertificate,
+                                    @RequestPart (required = false) MultipartFile medicalExpenses,
+                                    @RequestPart (required = false) MultipartFile deathCertificate,
+                                    @RequestParam String nameOfTheInsured,
+                                    @RequestParam String emailOfTheInsured,
+                                    @RequestParam String identityNumber,
+                                    @RequestParam String heirName,
+                                    @RequestParam String heirEmail,
+                                    @RequestParam Date reportDate,
+                                    @RequestParam Date incidentDate,
+                                    @RequestParam String lossCause,
+                                    @RequestParam String incidentLocation,
+                                    @RequestParam Float claimSubmission,
+                                    @RequestParam Float claimApproval,
+                                    @RequestParam String polisId) throws JsonProcessingException {
+        try{
+            if ((medicalCertificate != null) && (medicalExpenses != null)) {
+                if (deathCertificate != null) {
+                    medicalCertificate.transferTo(Paths.get(documentClaim, "PA-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename())));
+                    medicalExpenses.transferTo(Paths.get(documentClaim, "PA-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename())));
+                    deathCertificate.transferTo(Paths.get(documentClaim, "PA-SK-" + nameOfTheInsured + "." + FilenameUtils.getExtension(deathCertificate.getOriginalFilename())));
+                } else {
+                    medicalCertificate.transferTo(Paths.get(documentClaim, "PA-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename())));
+                    medicalExpenses.transferTo(Paths.get(documentClaim, "PA-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename())));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String result = "";
+        if ((medicalCertificate != null) && (medicalExpenses != null)) {
+            if (deathCertificate != null) {
+                String medicalCertificateName = StringUtils.cleanPath("PA-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename()));
+                String medicalExpensesName = StringUtils.cleanPath("PA-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename()));
+                String deathCertificateName = StringUtils.cleanPath("PA-SK-" + nameOfTheInsured + "." + FilenameUtils.getExtension(deathCertificate.getOriginalFilename()));
+                ClaimPA claimPA = new ClaimPA(heirName, heirEmail, reportDate, incidentDate, lossCause, incidentLocation, claimSubmission, claimApproval, medicalCertificateName, medicalExpensesName, deathCertificateName);
+                result = claimPAService.saveClaimPAByHeir(claimPA, polisId, identityNumber, nameOfTheInsured, emailOfTheInsured);
+            } else {
+                String medicalCertificateName = StringUtils.cleanPath("PA-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename()));
+                String medicalExpensesName = StringUtils.cleanPath("PA-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename()));
+                ClaimPA claimPA = new ClaimPA(heirName, heirEmail, reportDate, incidentDate, lossCause, incidentLocation, claimSubmission, claimApproval, medicalCertificateName, medicalExpensesName);
+                result = claimPAService.saveClaimPAByHeir(claimPA, polisId, identityNumber, nameOfTheInsured, emailOfTheInsured);
+            }
+        } else {
+            result = "Dokumen tidak lengkap";
+        }
+        return result;
+    }
 
     @DeleteMapping("/claimPA")
     public void deleteClaimPAById(@RequestParam(name = "id") String id) {
@@ -163,6 +214,11 @@ public class ClaimPAController {
     @GetMapping("/claimPA/{id}")
     public ClaimPA getClaimPAById(@PathVariable(name = "id") String id) {
         return claimPAService.getClaimPAById(id);
+    }
+
+    @PutMapping("/reviewPA/{id}")
+    public void reviewApprovedPA (@PathVariable String id, @RequestBody ClaimPA claimPA) throws IOException, MessagingException {
+        claimPAService.reviewClaimPAApproved(id, claimPA);
     }
 
     @PutMapping("/approvedClaimPA/{id}")

@@ -138,7 +138,7 @@
                 <tr>
                     <td bgcolor="#ffffff" align="left" style="padding: 20px 30px 40px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                         <p style="margin: 0;" th:text="${'Kepada Yth, '}"></p>
-                        <p style="margin: 0;" th:text="${'Bapak/Ibu ' + name}"></p>
+                        <p style="margin: 0;" th:text="${'Bapak/Ibu ' + heirName}"></p>
                         <br>
                         <p style="margin: 0;" th:text="${'Dengan hormat, Bersama ini kami sampaikan bahwa pengajuan klaim ' + productName + ' melalui M-ASK dengan rincian sebagai berkut'}"></p>
                     </td>
@@ -146,8 +146,9 @@
                 <tr>
                     <td bgcolor="#ffffff" align="left" style="padding: 0px 30px 20px 30px; color: #666666; font-family: 'Lato', Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; line-height: 25px;">
                         <p style="margin: 0;" th:text="${'Nomor Polis :' + polisNumber}"></p>
-                        <p style="margin: 0;" th:text="${'Nama Tertanggung :' + name}"></p>
+                        <p style="margin: 0;" th:text="${'Nama Tertanggung :' + nameOfTheInsured}"></p>
                         <p style="margin: 0;" th:text="${'Tanggal Kejadian :' + incidentDate }"></p>
+                        <p style="margin: 0;" th:text="${'Nama Pemohon :' + heirName}"></p>
                     </td>
                 </tr> <!-- COPY -->
                 <tr>

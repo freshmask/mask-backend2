@@ -149,6 +149,12 @@ public class ClaimPARServiceImpl implements ClaimPARService {
 
     }
 
+    @Override
+    public void reviewClaimPARApproved(String id, ClaimPAR claimPAR) {
+        ClaimPAR claimPAR1 = claimPARRepository.findById(id).get();
+        claimPAR1.getTransaction().getTransactionPAR().setStatusClaim("data sesuai");
+        claimPARRepository.save(claimPAR1);
+    }
 
     @Override
     public void updateClaimPARRejected(String id, String description) throws IOException, MessagingException {

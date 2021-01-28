@@ -43,6 +43,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         web.ignoring()
         .antMatchers("/signup", "/categoriesPA/list/**", "/packagesPA/list","/packageTravel/list", "/categoryPA/list/**", "/confirm-account**", "/forgotPassword**", "/getdetails", "/trialPAR","/downloadFile/**", "/categoriesPA/**", "/v2/api-docs", "/webjars/**",
                 "/swagger-resources/**",
+                "/claimpaByHeir",
+                "/claimtravelByHeir",
+                "/customerPAByPolis/**",
+                "/customerTravelByPolis/**",
                 "/configuration/**");
     }
     @Override

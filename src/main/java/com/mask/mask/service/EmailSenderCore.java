@@ -181,7 +181,8 @@ public class EmailSenderCore {
         mail.setSubject("[M-ASK] Konfirmasi Klaim Asuransi Kecelakaan Diri");
 
         Map<String, Object> model = new HashMap<>();
-        model.put("name", claimPA.getName());
+        model.put("nameOfTheInsured", customerPA.getName());
+        model.put("heirName", claimPA.getName());
         model.put("productName", product.getProductName());
 
         SimpleDateFormat formatIncident = new SimpleDateFormat("dd MMMM yyyy");
@@ -217,7 +218,8 @@ public class EmailSenderCore {
         mail.setSubject("[M-ASK] Konfirmasi Klaim Asuransi Perjalanan");
 
         Map<String, Object> model = new HashMap<>();
-        model.put("name", claimTravel.getName());
+        model.put("nameOfTheInsured", customerTravel.getName());
+        model.put("heirName", claimTravel.getName());
         model.put("productName", product.getProductName());
 
         SimpleDateFormat formatIncident = new SimpleDateFormat("dd MMMM yyyy");
@@ -251,7 +253,8 @@ public class EmailSenderCore {
         mail.setSubject("[M-ASK] Konfirmasi Klaim Asuransi Property atau Harta Benda");
 
         Map<String, Object> model = new HashMap<>();
-        model.put("name", claimPAR.getName());
+        model.put("nameOfTheInsured", customerPAR.getName());
+        model.put("heirName", claimPAR.getName());
         model.put("productName", product.getProductName());
 
         SimpleDateFormat formatIncident = new SimpleDateFormat("dd MMMM yyyy");

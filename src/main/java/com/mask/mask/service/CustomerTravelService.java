@@ -16,5 +16,5 @@ public interface CustomerTravelService {
     public CustomerTravel getCustomerTravelById (String customertravelId);
     public void editCustomerTravel(String customertravelId, CustomerTravel customerTravel);
     public void deleteCustomerTravelById (String customertravelId);
-
+    public CustomerTravel getCustomerTravelByPolisId (String polisId);
 }

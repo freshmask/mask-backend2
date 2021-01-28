@@ -89,4 +89,13 @@ public class CustomerTravelServiceImpl implements CustomerTravelService {
     public void deleteCustomerTravelById(String customertravelId) {
         customerTravelRepository.deleteById(customertravelId);
     }
+
+    @Override
+    public CustomerTravel getCustomerTravelByPolisId(String polisId) {
+        Optional<CustomerTravel> customerTravelOptional = customerTravelRepository.findCustomerTravelByTransactionTravelId(polisId);
+        if (customerTravelOptional.isPresent()){
+            return customerTravelOptional.get();
+        }
+        throw new OtherDataNotFoundException(String.format(OtherDataNotFoundException.NOT_FOUND_MESSAGE, CustomerTravel.class,polisId));
+    }
 }

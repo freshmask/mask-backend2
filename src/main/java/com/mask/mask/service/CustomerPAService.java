@@ -2,6 +2,7 @@ package com.mask.mask.service;
 
 import com.mask.mask.dto.CustomerPASearchDTO;
 import com.mask.mask.entity.CustomerPA;
+import com.mask.mask.entity.CustomerTravel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -14,5 +15,5 @@ public interface CustomerPAService {
     public CustomerPA getCustomerPAById (String customerpaId);
     public void editCustomerPA(String customerpaId, CustomerPA customerPA);
     public void deleteCustomerPAById (String customerpaId);
-
+    public CustomerPA getCustomerPAByPolisId (String polisId);
 }

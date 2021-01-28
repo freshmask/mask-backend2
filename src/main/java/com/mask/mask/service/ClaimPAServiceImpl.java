@@ -145,6 +145,109 @@ public class ClaimPAServiceImpl implements ClaimPAService {
     }
 
     @Override
+    public String saveClaimPAByHeir(ClaimPA claimPA, String polisId, String identityNumber, String nameOfTheInsured,String emailOfTheInsured) {
+        float submissionValue = 0.00f;
+        String result = "";
+        TransactionPA transactionPAInitiate = transactionPAService.getTransactionPAById(polisId);
+        CustomerPA customerPA = transactionPAInitiate.getCustomerPA();
+        if (transactionPAInitiate.getCustomerPA().getHeirName().equalsIgnoreCase(claimPA.getName())) {
+            if (transactionPAInitiate.getCustomerPA().getHeirEmail().equalsIgnoreCase(claimPA.getEmail())) {
+                if ((customerPA.getIdentityNo().equalsIgnoreCase(identityNumber)) && (customerPA.getName().equalsIgnoreCase(nameOfTheInsured))) {
+                    CategoryPA categoryPAInitiate = categoryPAService.getCategoryPAById(transactionPAInitiate.getCategoryPA().getCategoryId());
+                    PackagePA packagePAInitiate = packagePAService.getPackagePAById(categoryPAInitiate.getPackagePA().getPaId());
+                    if (transactionPAInitiate.getStatusPolis().equalsIgnoreCase("aktif")) {
+                        if (!transactionPAInitiate.getIsClaim().equalsIgnoreCase("true")) {
+                            if (claimPA.getLossCause().equalsIgnoreCase("Lengan kanan mulai dari sendi bahu")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.6f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Lengan kiri mulai dari sendi bahu")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.5f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Lengan kanan mulai dari atasnya sendi siku")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.5f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Lengan kiri mulai dari atasnya sendi siku")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.4f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Tangan kanan mulai dari atasnya pergelangan tangan")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.4f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Tangan kiri mulai dari atasnya pergelangan tangan")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.3f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Satu kaki mulai dari lutut sampai pangkal paha")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.5f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Satu kaki mulai dari mata kaki sampai lutut")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.25f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Ibu jari tangan kanan")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.15f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Ibu jari tangan kiri")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.1f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Jari telunjuk tangan kanan")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.1f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Jari telunjuk tangan kiri")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.08f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Jari kelingking tangan kanan")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.08f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Jari kelingking tangan kiri")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.06f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Jari tengah atau manis tangan kanan")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.05f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Jari tengah atau manis tangan kiri")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.04f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Satu ibu jari kaki")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.08f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Satu jari kaki lainnya")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.05f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Sebelah mata")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.5f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Pendengaran pada kedua belah telinga")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.5f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Pendengaran pada sebelah telinga")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.25f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Sebelah daun telinga secara keseluruhan")) {
+                                submissionValue = packagePAInitiate.getCompensation() * 0.05f;
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Cacat Tetap Keseluruhan")) {
+                                submissionValue = packagePAInitiate.getCompensation();
+                            } else if (claimPA.getLossCause().equalsIgnoreCase("Kematian")) {
+                                submissionValue = packagePAInitiate.getCompensation();
+                            }
+                            if (claimPA.getClaimSubmission() <= submissionValue) {
+                                Transaction transaction = transactionService.getTransactionById(transactionPAInitiate.getTransaction().getId());
+                                transactionPAInitiate.setStatusClaim("Proses Persetujuan");
+                                transactionPAInitiate.setIsClaim("true");
+                                claimPA.setTransaction(transaction);
+                                transaction.setVersion(transaction.getVersion() + 1);
+                                claimPARepository.save(claimPA);
+                                result = "Sukses";
+                            } else if (claimPA.getClaimSubmission() == null) {
+                                Transaction transaction = transactionService.getTransactionById(transactionPAInitiate.getTransaction().getId());
+                                transactionPAInitiate.setStatusClaim("Proses Persetujuan");
+                                transactionPAInitiate.setIsClaim("true");
+                                claimPA.setTransaction(transaction);
+                                claimPA.setClaimSubmission(submissionValue);
+                                transaction.setVersion(transaction.getVersion() + 1);
+                                transactionService.updateTransaction(transaction.getId(), transaction);
+                                transactionPAService.updateTransactionPA(transactionPAInitiate);
+                                claimPARepository.save(claimPA);
+                                result = "Sukses";
+                            } else {
+                                String subValue = String.format("%.0f", submissionValue);
+                                result = "Nilai Tuntutan Anda Melebihi Nilai Maksimal Santunan Sebesar Rp " + subValue;
+                            }
+                        } else {
+                            result = "Polis ini sudah di klaim";
+                        }
+                    } else {
+                        result = "Klaim Tidak Dapat Dilakukan Karena Status Polis Anda Sudah Tidak Aktif";
+                    }
+                } else {
+                    result = "Identitas Tertanggung tidak sesuai dengan polis";
+                }
+            } else {
+                result = "Email pemohon tidak terdaftar sebagai ahli waris sehingga anda tidak memiliki hak untuk mengajukan klaim asuransi tersebut";
+            }
+        } else {
+            result = "Nama pemohon tidak terdaftar sebagai ahli waris sehingga anda tidak memiliki hak untuk mengajukan klaim asuransi tersebut";
+        }
+        return result;
+    }
+
+    @Override
     public void updateClaimPA(String id, ClaimPA claimPA) {
         ClaimPA claimPA1 = claimPARepository.findById(id).get();
         claimPA1.setName(claimPA.getName());
@@ -181,6 +284,13 @@ public class ClaimPAServiceImpl implements ClaimPAService {
     @Override
     public void deleteClaimPAById(String id) {
         claimPARepository.deleteById(id);
+    }
+
+    @Override
+    public void reviewClaimPAApproved(String id, ClaimPA claimPA) throws IOException, MessagingException {
+        ClaimPA claimPA1 = claimPARepository.findById(id).get();
+        claimPA1.getTransaction().getTransactionPA().setStatusClaim("data sesuai");
+        claimPARepository.save(claimPA1);
     }
 
     @Override

@@ -102,6 +102,31 @@ public class ClaimPA extends Auditable<String> {
         this.transaction = transaction;
     }
 
+    public ClaimPA(String name, String email, Date reportDate, Date incidentDate, String lossCause, String incidentLocation, Float claimSubmission, Float claimApproval, String deathCertificateName) {
+        this.name = name;
+        this.email = email;
+        this.reportDate = reportDate;
+        this.incidentDate = incidentDate;
+        this.lossCause = lossCause;
+        this.incidentLocation = incidentLocation;
+        this.claimSubmission = claimSubmission;
+        this.claimApproval = claimApproval;
+        this.deathCertificateName = deathCertificateName;
+    }
+
+    public ClaimPA(String name, String email, Date reportDate, Date incidentDate, String lossCause, String incidentLocation, Float claimSubmission, Float claimApproval, String medicalCertificateName, String medicalExpensesName) {
+        this.name = name;
+        this.email = email;
+        this.reportDate = reportDate;
+        this.incidentDate = incidentDate;
+        this.lossCause = lossCause;
+        this.incidentLocation = incidentLocation;
+        this.claimSubmission = claimSubmission;
+        this.claimApproval = claimApproval;
+        this.medicalCertificateName = medicalCertificateName;
+        this.medicalExpensesName = medicalExpensesName;
+    }
+
     public String getId() {
         return id;
     }

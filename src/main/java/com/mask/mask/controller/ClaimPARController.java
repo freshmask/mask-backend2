@@ -131,6 +131,11 @@ public class ClaimPARController {
         claimPARService.deleteClaimPARById(claimparId);
     }
 
+    @PutMapping("/reviewPAR/{id}")
+    public void reviewApprovedPAR (@PathVariable String id, @RequestBody ClaimPAR claimPAR) throws IOException, MessagingException {
+        claimPARService.reviewClaimPARApproved(id, claimPAR);
+    }
+
     @PutMapping("/approvedClaimPAR/{id}")
     public void updateApprovedPAR (@PathVariable String id, @RequestBody ClaimPAR claimPAR) throws IOException, MessagingException {
         claimPARService.updateClaimPARApproved(id, claimPAR);

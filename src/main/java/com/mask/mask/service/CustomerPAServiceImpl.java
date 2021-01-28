@@ -81,4 +81,13 @@ public class CustomerPAServiceImpl implements CustomerPAService {
     public void deleteCustomerPAById(String customerpaId) {
         customerPARepository.deleteById(customerpaId);
     }
+
+    @Override
+    public CustomerPA getCustomerPAByPolisId(String polisId) {
+        Optional<CustomerPA> customerPAOptional = customerPARepository.findCustomerPAByTransactionPATrxpaId(polisId);;
+        if (customerPAOptional.isPresent()){
+            return customerPAOptional.get();
+        }
+        throw new OtherDataNotFoundException(String.format(OtherDataNotFoundException.NOT_FOUND_MESSAGE, CustomerPA.class,polisId));
+    }
 }

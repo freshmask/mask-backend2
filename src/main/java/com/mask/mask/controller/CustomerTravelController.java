@@ -143,4 +143,10 @@ public class CustomerTravelController {
     public void deleteCustomerTravelById (@RequestParam(name = "customertravelId") String customertravelId){
         customerTravelService.deleteCustomerTravelById(customertravelId);
     }
+
+    @GetMapping("/customerTravelByPolis/{polisId}")
+    public CustomerTravel getCustomerTravelByPolisId(@PathVariable(name = "polisId") String polisId){
+        CustomerTravel customerTravel = customerTravelService.getCustomerTravelByPolisId(polisId);
+        return customerTravel;
+    }
 }

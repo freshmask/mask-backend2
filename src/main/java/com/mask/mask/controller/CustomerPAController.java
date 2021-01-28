@@ -128,11 +128,14 @@ public class CustomerPAController {
         customerPAService.editCustomerPA(customerpaId, customerPA);
     }
 
-
-
-
     @DeleteMapping("/customerPA")
     public void deleteCustomerPAById (@RequestParam(name = "customerpaId") String customerpaId){
         customerPAService.deleteCustomerPAById(customerpaId);
+    }
+
+    @GetMapping("/customerPAByPolis/{polisId}")
+    public CustomerPA getCustomerPAByPolisId(@PathVariable(name = "polisId") String polisId){
+        CustomerPA customerPA = customerPAService.getCustomerPAByPolisId(polisId);
+        return customerPA;
     }
 }

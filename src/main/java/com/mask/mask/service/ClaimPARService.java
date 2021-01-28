@@ -2,6 +2,7 @@ package com.mask.mask.service;
 
 import com.mask.mask.dto.ClaimPARSearchDTO;
 import com.mask.mask.entity.ClaimPAR;
+import com.mask.mask.entity.ClaimTravel;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,5 +20,6 @@ public interface ClaimPARService {
     public void editClaimPAR(String claimparId, ClaimPAR claimPAR);
     public void deleteClaimPARById (String claimparId);
     public void updateClaimPARApproved(String id, ClaimPAR claimPAR) throws IOException, MessagingException;
+    public void reviewClaimPARApproved(String id, ClaimPAR claimPAR);
     public void updateClaimPARRejected(String id, String description) throws IOException, MessagingException;
 }

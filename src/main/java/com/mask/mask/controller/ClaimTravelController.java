@@ -94,6 +94,58 @@ public class ClaimTravelController {
         return result;
     }
 
+    @PostMapping("/claimtravelByHeir")
+    public String saveClaimTravelByHeir(@RequestPart (required = false) MultipartFile medicalCertificate,
+                                        @RequestPart (required = false) MultipartFile medicalExpenses,
+                                        @RequestPart (required = false) MultipartFile deathCertificate,
+                                        @RequestParam String nameOfTheInsured,
+                                        @RequestParam String emailOfTheInsured,
+                                        @RequestParam String identityNumber,
+                                        @RequestParam String heirName,
+                                        @RequestParam String heirEmail,
+                                        @RequestParam Date reportDate,
+                                        @RequestParam Date incidentDate,
+                                        @RequestParam String lossCause,
+                                        @RequestParam String incidentLocation,
+                                        @RequestParam Float claimSubmission,
+                                        @RequestParam Float claimApproval,
+                                        @RequestParam String polisId) throws JsonProcessingException {
+        String result = "";
+        System.out.println(polisId);
+        try{
+            if ((medicalCertificate != null) && (medicalExpenses != null)) {
+                if (deathCertificate != null) {
+                    medicalCertificate.transferTo(Paths.get(documentClaim, "TRV-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename())));
+                    medicalExpenses.transferTo(Paths.get(documentClaim, "TRV-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename())));
+                    deathCertificate.transferTo(Paths.get(documentClaim, "TRV-SK-" + nameOfTheInsured + "." + FilenameUtils.getExtension(deathCertificate.getOriginalFilename())));
+                } else {
+                    medicalCertificate.transferTo(Paths.get(documentClaim, "TRV-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename())));
+                    medicalExpenses.transferTo(Paths.get(documentClaim, "TRV-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename())));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if ((medicalCertificate != null) && (medicalExpenses != null)) {
+            if (deathCertificate != null) {
+                String medicalCertificateName = StringUtils.cleanPath("TRV-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename()));
+                String medicalExpensesName = StringUtils.cleanPath("TRV-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename()));
+                String deathCertificateName = StringUtils.cleanPath("TRV-SK-" + nameOfTheInsured + "." + FilenameUtils.getExtension(deathCertificate.getOriginalFilename()));
+                ClaimTravel claimTravel = new ClaimTravel(heirName, heirEmail, reportDate, incidentDate, lossCause, incidentLocation, medicalCertificateName, medicalExpensesName, deathCertificateName, claimSubmission, claimApproval);
+                result = claimTravelService.addClaimTravelByHeir(claimTravel, polisId, identityNumber, nameOfTheInsured, emailOfTheInsured);
+            } else {
+                String medicalCertificateName = StringUtils.cleanPath("TRV-SKD-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalCertificate.getOriginalFilename()));
+                String medicalExpensesName = StringUtils.cleanPath("TRV-RBP-" + nameOfTheInsured + "." + FilenameUtils.getExtension(medicalExpenses.getOriginalFilename()));
+                ClaimTravel claimTravel = new ClaimTravel(heirName, heirEmail, reportDate, incidentDate, lossCause, incidentLocation, medicalCertificateName, medicalExpensesName, claimSubmission, claimApproval);
+                result = claimTravelService.addClaimTravelByHeir(claimTravel, polisId, identityNumber, nameOfTheInsured, emailOfTheInsured);
+            }
+        } else {
+            result = "Dokumen tidak lengkap";
+        }
+        return result;
+    }
+
     @DeleteMapping("/claimtravel")
     public void deleteClaimTravelById(@RequestParam(name = "id") String id) {
         claimTravelService.deleteClaimTravelById(id);
@@ -157,6 +209,11 @@ public class ClaimTravelController {
     @GetMapping("/claimtravel/{id}")
     public ClaimTravel getClaimTravelById(@PathVariable(name = "id") String id) {
         return claimTravelService.getClaimTravelById(id);
+    }
+
+    @PutMapping("/reviewTravel/{id}")
+    public void reviewApprovedTravel (@PathVariable String id, @RequestBody ClaimTravel claimTravel) throws IOException, MessagingException {
+        claimTravelService.reviewClaimTravelApproved(id, claimTravel);
     }
 
     @PutMapping("/approvedTravel/{id}")

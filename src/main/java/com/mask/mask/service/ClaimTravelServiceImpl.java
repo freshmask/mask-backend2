@@ -123,6 +123,98 @@ public class ClaimTravelServiceImpl implements ClaimTravelService {
     }
 
     @Override
+    public String addClaimTravelByHeir(ClaimTravel claimTravel, String polisId, String identityNumber, String nameOfTheInsured, String emailOfTheInsured) {
+        TransactionTravel transactionTravel = transactionTravelService.getTransactionTravelById(polisId);
+        CustomerTravel customerTravel = transactionTravel.getCustomerTravel();
+        float submissionValue = 0.00f;
+        String result = "";
+        if (transactionTravel.getCustomerTravel().getHeirName().equalsIgnoreCase(claimTravel.getName())) {
+            if (transactionTravel.getCustomerTravel().getHeirEmail().equalsIgnoreCase(claimTravel.getEmail())) {
+                if ((customerTravel.getIdentityNo().equalsIgnoreCase(identityNumber)) && (customerTravel.getName().equalsIgnoreCase(nameOfTheInsured))) {
+                    if (transactionTravel.getStatusPolis().equalsIgnoreCase("aktif")) {
+                        if (!transactionTravel.getIsClaim().equalsIgnoreCase("true")) {
+                            if (claimTravel.getLossCause().equalsIgnoreCase("Meninggal Dunia karena Kecelakaan")) {
+                                submissionValue = 135000000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Cacat Tetap akibat kecelakaan")) {
+                                submissionValue = 135000000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Pembatalan Perjalanan")) {
+                                submissionValue = 2025000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Pengurangan Perjalanan")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Penundaan Perjalanan")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Keterlambatan Penerbangan")) {
+                                submissionValue = 2025000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Tertinggal Penerbangan")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Pembajakan Pesawat Terbang")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Keterlambatan bagasi")) {
+                                submissionValue = 2025000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Kehilangan atau kerusakan bagasi")) {
+                                submissionValue = 6750000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Kehilangan dokumen perjalanan atau barang pribadi")) {
+                                submissionValue = 1350000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Perawatan medis")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Evakuasi medis darurat")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Pendampingan anak")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Perjalanan salah satu anggota keluarga")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Repatriasi Pemulangan jenazah")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Cidera badan atau kerusakan fisik harta benda pihak ketiga")) {
+                                submissionValue = 1350000.00f;
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Layanan pengiriman pesan darurat")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Layanan pencarian bagasi atau dokumen hilang")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Layanan alamat dan nomor telepon Kedutaan")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Layanan 24 jam Tele-Konsultasi medis, Evaluasi dan Rujukan Medis")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Layanan informasi Pra-Perjalanan")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            } else if (claimTravel.getLossCause().equalsIgnoreCase("Layanan rujukan pengacara dan penterjemah")) {
+                                submissionValue = claimTravel.getClaimSubmission();
+                            }
+
+                            if (claimTravel.getClaimSubmission() <= submissionValue) {
+                                Transaction transaction = transactionService.getTransactionById(transactionTravel.getTransaction().getId());
+                                transactionTravel.setIsClaim("true");
+                                transactionTravel.setStatusClaim("Proses Persetujuan");
+                                claimTravel.setClaimSubmission(submissionValue);
+                                claimTravel.setTransaction(transaction);
+                                transaction.setVersion(transaction.getVersion() + 1);
+                                transactionService.updateTransaction(transaction.getId(), transaction);
+                                transactionTravelService.updateTransactionTravel(transactionTravel.getId(), transactionTravel);
+                                claimTravelRepository.save(claimTravel);
+                                result = "Sukses";
+                            } else {
+                                String subValue = String.format("%.0f", submissionValue);
+                                result = "Nilai Tuntutan Anda Melebihi Nilai Maksimal Santunan Sebesar Rp " + subValue;
+                            }
+                        } else {
+                            result = "Polis ini sudah di klaim";
+                        }
+                    } else {
+                        result = "Klaim Tidak Dapat Dilakukan Karena Status Polis Anda Sudah Tidak Aktif";
+                    }
+                } else {
+                    result = "Identitas Tertanggung tidak sesuai dengan polis";
+                }
+            } else {
+                result = "Email pemohon tidak terdaftar sebagai ahli waris sehingga anda tidak memiliki hak untuk mengajukan klaim asuransi";
+            }
+        } else {
+            result = "Nama pemohon tidak terdaftar sebagai ahli waris sehingga anda tidak memiliki hak untuk mengajukan klaim asuransi";
+        }
+        return result;
+    }
+
+    @Override
     public Page<ClaimTravel> getClaimTravelInPage(Pageable pageable) {
         return claimTravelRepository.findAll(pageable);
     }
@@ -155,6 +247,14 @@ public class ClaimTravelServiceImpl implements ClaimTravelService {
     @Override
     public void deleteClaimTravelById(String id) {
         claimTravelRepository.deleteById(id);
+    }
+
+
+    @Override
+    public void reviewClaimTravelApproved(String id, ClaimTravel claimTravel) throws IOException, MessagingException {
+        ClaimTravel claimTravel1 = claimTravelRepository.findById(id).get();
+        claimTravel1.getTransaction().getTransactionTravel().setStatusClaim("data sesuai");
+        claimTravelRepository.save(claimTravel1);
     }
 
     @Override

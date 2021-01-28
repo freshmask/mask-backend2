@@ -2,6 +2,7 @@ package com.mask.mask.service;
 
 import com.mask.mask.entity.*;
 import com.mask.mask.exception.DataNotFoundException;
+import com.mask.mask.exception.OtherDataNotFoundException;
 import com.mask.mask.repository.TransactionTravelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -9,10 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class TransactionTravelServiceImpl implements TransactionTravelService {
@@ -56,7 +54,11 @@ public class TransactionTravelServiceImpl implements TransactionTravelService {
 
     @Override
     public TransactionTravel getTransactionTravelById(String id) {
-        return transactionTravelRepository.findById(id).get();
+        Optional<TransactionTravel> transactionTravelOptional = transactionTravelRepository.findById(id);;
+        if (transactionTravelOptional.isPresent()){
+            return transactionTravelOptional.get();
+        }
+        throw new OtherDataNotFoundException(String.format(OtherDataNotFoundException.NOT_FOUND_MESSAGE,TransactionTravel.class,id));
     }
 
     @Override
