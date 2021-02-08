@@ -78,7 +78,7 @@ public class TransactionTravelServiceImpl implements TransactionTravelService {
 
     @Scheduled(cron = "0 0 0 * * ?")
     public void changeStatusPolisTravelScheduled (){
-        List<TransactionTravel> transactionTravels = transactionTravelRepository.findAllByStatusPolis("tidak aktif");
+        List<TransactionTravel> transactionTravels = transactionTravelRepository.findAllByStatusPolis("Belum berlaku");
         Date currentDate = new Date();
         for (TransactionTravel transactionTravel:transactionTravels) {
             if (((currentDate.after(transactionTravel.getStartDate())) && (currentDate.before(transactionTravel.getExpDate()))) || currentDate.equals(transactionTravel.getStartDate())){

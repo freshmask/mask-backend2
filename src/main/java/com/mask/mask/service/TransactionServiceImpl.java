@@ -211,7 +211,7 @@ public class TransactionServiceImpl implements TransactionService {
                 transactionTravel.setIsPayment("Lunas");
                 Date currentDate = new Date();
                 if(currentDate.before(transactionTravel.getStartDate())){
-                    transactionTravel.setStatusPolis("belum berlaku");
+                    transactionTravel.setStatusPolis("Belum berlaku");
                 } else if ((currentDate.after(transactionTravel.getStartDate())) || (currentDate.equals(transactionTravel.getStartDate()))){
                     transactionTravel.setStatusPolis("aktif");
                 }

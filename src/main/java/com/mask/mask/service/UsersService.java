@@ -21,6 +21,7 @@ public interface UsersService {
     public Users getUsersById(String id);
     public void setStatus(String id);
     public Page<Users> getUsersByRole(String role, Pageable pageable);
+    public Page<Users> findUserByRole(String role, Pageable pageable);
     public void registerUser(Users users);
 
     public SecureToken getByConfirmToken (String token);

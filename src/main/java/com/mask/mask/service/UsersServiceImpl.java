@@ -25,6 +25,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -136,6 +137,10 @@ public class UsersServiceImpl implements UsersService {
         return userRepository.getUserByRole(role, pageable);
     }
 
+    @Override
+    public Page<Users> findUserByRole(String role, Pageable pageable) {
+        return null;
+    }
 
     @Override
     public void registerUser(Users users) {
